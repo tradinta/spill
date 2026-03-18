@@ -1,5 +1,6 @@
-# Use an official Python runtime as a parent image
-FROM python:3.10-slim
+FROM python:3.9-slim
+
+WORKDIR /app
 
 # Install system dependencies for Playwright and Chromium
 RUN apt-get update && apt-get install -y \
@@ -20,27 +21,19 @@ RUN apt-get update && apt-get install -y \
     libx11-xcb1 \
     && rm -rf /var/lib/apt/lists/*
 
-# Set the working directory in the container
-WORKDIR /app
+# Copy requirements and install
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Create a non-root user for Hugging Face
-RUN useradd -m -u 1000 user
-USER user
-ENV PATH="/home/user/.local/bin:$PATH"
+# Install Playwright and chromium dependencies
+RUN playwright install chromium --with-deps
 
-# Copy the current directory contents into the container at /app
-# We use --chown to ensure the 'user' owns the files
-COPY --chown=user . /app
+# Copy the rest of the application
+COPY . .
 
-# Install any needed packages specified in requirements.txt
-RUN pip install --no-cache-dir --upgrade -r requirements.txt
-
-# Install Playwright browsers (Chromium)
-RUN playwright install chromium
-
-# Hugging Face Spaces run on port 7860 by default
+# Hugging Face exposes port 7860
 ENV PORT=7860
 EXPOSE 7860
 
-# Run server.py when the container launches
+# Start the Flask server
 CMD ["python", "server.py"]
