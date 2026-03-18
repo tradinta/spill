@@ -10,7 +10,7 @@ services:
         value: 10000
 
   # React Frontend (Static Site)
-  - type: static
+  - type: web
     name: osint-frontend
     runtime: static
     rootDir: osint-web
