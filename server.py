@@ -97,6 +97,7 @@ def extract_data():
 
 if __name__ == '__main__':
     import os
-    port = int(os.environ.get("PORT", 3000))
+    # Hugging Face Spaces use port 7860 by default
+    port = int(os.environ.get("PORT", 7860))
     print(f"[*] Starting OSINT Python Microservice on port {port}...")
     app.run(host='0.0.0.0', port=port, debug=False, threaded=True)
