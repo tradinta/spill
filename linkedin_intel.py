@@ -126,19 +126,29 @@ async def get_linkedin_intel(username):
                     search_data = await search_fallback(username)
                     # Build dossier from search results (or empty if nothing found)
                     await browser.close()
-                    return {
                         "dossier_meta": {
                             "target": f"linkedin.com/in/{username}",
                             "collection_time_utc": datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S'),
                             "clearance_level": "TOP SECRET // LinkedIn Reconnaissance",
                             "note": "Auth wall detected — data sourced from search engine snippets" if search_data else "Auth wall detected — limited data available without login"
                         },
+                        "profile_card": {
+                            "photo_url": "", # No image from fallback
+                            "name": search_data.get("name", "N/A"),
+                            "username": f"in/{username}",
+                            "id": "N/A",
+                            "followers": "N/A",
+                            "following": "N/A",
+                            "posts": "N/A",
+                            "bio": search_data.get("headline", ""),
+                            "verified": False,
+                            "stories": [],
+                            "follower_list": [],
+                            "following_list": []
+                        },
                         "account_archeology": {
-                            "Full_Name": search_data.get("name", "N/A"),
-                            "Headline": search_data.get("headline", "N/A"),
                             "Location": search_data.get("location", "N/A"),
                             "Profile_URL": f"https://www.linkedin.com/in/{username}/",
-                            "Profile_Image": "N/A (Auth Wall)",
                             "Connections": "N/A (Auth Wall)"
                         },
                         "professional_intelligence": {
@@ -324,13 +334,24 @@ async def get_linkedin_intel(username):
                     "clearance_level": "TOP SECRET // LinkedIn Reconnaissance",
                     "voyager_packets_intercepted": len(intercepted_data["voyager"])
                 },
+                "profile_card": {
+                    "photo_url": person.get("image", {}).get("contentUrl", dom_data.get("profileImg", meta_data.get("og_image", ""))) if isinstance(person.get("image"), dict) else dom_data.get("profileImg", meta_data.get("og_image", "")),
+                    "name": person.get("name", dom_data.get("name", meta_data.get("og_title", "N/A"))),
+                    "username": f"in/{username}",
+                    "id": "N/A",
+                    "followers": connections,
+                    "following": "N/A", # Hard to get on LI
+                    "posts": "N/A", # Hard to get on LI
+                    "bio": dom_data.get("headline", ""),
+                    "verified": False,
+                    "stories": [],
+                    "follower_list": [],
+                    "following_list": []
+                },
                 "account_archeology": {
-                    "Full_Name": person.get("name", dom_data.get("name", meta_data.get("og_title", "N/A"))),
-                    "Headline": dom_data.get("headline", "N/A"),
                     "Location": person.get("address", {}).get("addressLocality", dom_data.get("location", "N/A")) if isinstance(person.get("address"), dict) else dom_data.get("location", "N/A"),
                     "About": dom_data.get("about", person.get("description", "N/A")),
                     "Profile_URL": meta_data.get("og_url", url),
-                    "Profile_Image": person.get("image", {}).get("contentUrl", dom_data.get("profileImg", meta_data.get("og_image", "N/A"))) if isinstance(person.get("image"), dict) else dom_data.get("profileImg", meta_data.get("og_image", "N/A")),
                     "Connections": connections
                 },
                 "professional_intelligence": {

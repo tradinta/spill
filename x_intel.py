@@ -215,6 +215,17 @@ async def get_x_intel(username):
                     "collection_time_utc": datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S'),
                     "clearance_level": "TOP SECRET // X Reconnaissance"
                 },
+                "profile_card": {
+                    "photo_url": legacy.get("profile_image_url_https", "").replace("_normal", ""),
+                    "name": core.get("name", legacy.get("name", "N/A")),
+                    "username": f"@{legacy.get('screen_name', username)}",
+                    "id": user_result.get("rest_id", "N/A"),
+                    "followers": format_num(legacy.get("followers_count", 0)),
+                    "following": format_num(legacy.get("friends_count", 0)),
+                    "posts": format_num(legacy.get("statuses_count", 0)),
+                    "bio": legacy.get("description", ""),
+                    "verified": user_result.get("is_blue_verified", False) or legacy.get("verified", False)
+                },
                 "technical_dna": {
                     "Rest_ID": user_result.get("rest_id", "N/A"),
                     "Guest_Token": intel_data["headers"].get("Guest_Token"),

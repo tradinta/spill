@@ -62,6 +62,18 @@ async def get_instagram_intel(username):
                     if user:
                         intel_data["profile"] = user
                         print(f"[+] Intercepted Instagram Web Profile API")
+                        
+                # Intercept Stories/Highlights
+                if "reels_media" in r_url or "highlight" in r_url:
+                    if response.status == 200:
+                        try:
+                            text = await response.text()
+                            parsed = json.loads(text)
+                            reels = parsed.get("data", {}).get("reels_media", [])
+                            if reels:
+                                intel_data["reels"].extend(reels)
+                                print(f"[+] Intercepted {len(reels)} Instagram Stories/Highlights")
+                        except: pass
 
             except Exception as e:
                 pass
@@ -254,16 +266,25 @@ async def get_instagram_intel(username):
                     "clearance_level": "TOP SECRET // Instagram Reconnaissance",
                     "posts_analyzed": len(intel_data["posts"])
                 },
+                "profile_card": {
+                    "photo_url": (profile.get("profile_pic_url_hd", profile.get("hd_profile_pic_url_info", {}).get("url", "")) or "").split("?")[0],
+                    "name": profile.get("full_name", profile_from_meta.get("name", "N/A")),
+                    "username": f"@{profile.get('username', username)}",
+                    "id": str(profile.get("id", "N/A")),
+                    "followers": format_num(followers) if followers else profile_from_meta.get("followers_text", "N/A"),
+                    "following": format_num(following) if following else profile_from_meta.get("following_text", "N/A"),
+                    "posts": format_num(media_count) if media_count else profile_from_meta.get("posts_text", "N/A"),
+                    "bio": profile.get("biography", profile.get("bio", profile_from_meta.get("description", ""))),
+                    "verified": profile.get("is_verified", False),
+                    "stories": intel_data.get("reels", [])[:10], # Keep top 10 for payload size
+                    "follower_list": [], # Requires heavy scraping auth on IG
+                    "following_list": []
+                },
                 "account_archeology": {
-                    "Full_Name": profile.get("full_name", profile_from_meta.get("name", "N/A")),
-                    "Username": profile.get("username", username),
-                    "Biography": profile.get("biography", profile.get("bio", profile_from_meta.get("description", "N/A"))),
                     "External_URL": profile.get("external_url", profile.get("bio_links", [{}])[0].get("url", "N/A") if profile.get("bio_links") else "N/A"),
-                    "Is_Verified": profile.get("is_verified", False),
                     "Is_Business": profile.get("is_business_account", profile.get("is_professional_account", False)),
                     "Business_Category": profile.get("category_name", profile.get("category", "N/A")),
-                    "Is_Private": profile.get("is_private", False),
-                    "Profile_Pic_URL": (profile.get("profile_pic_url_hd", profile.get("hd_profile_pic_url_info", {}).get("url", "")) or "").split("?")[0]
+                    "Is_Private": profile.get("is_private", False)
                 },
                 "public_metrics": {
                     "Followers": format_num(followers) if followers else profile_from_meta.get("followers_text", "N/A"),

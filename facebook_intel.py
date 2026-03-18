@@ -204,11 +204,23 @@ async def get_facebook_intel(username):
                     "clearance_level": "TOP SECRET // Facebook Reconnaissance",
                     "graphql_packets_intercepted": len(intercepted_data["graphql"])
                 },
+                "profile_card": {
+                    "photo_url": dom_data.get("profileImg", meta_data.get("og_image", "")),
+                    "name": graphql_profile.get("name", dom_data.get("name", meta_data.get("og_title", "N/A"))),
+                    "username": f"@{graphql_profile.get('username', graphql_profile.get('vanity', username))}",
+                    "id": fb_id,
+                    "followers": dom_data.get("followers", "N/A"),
+                    "following": dom_data.get("friends", "N/A"), # Facebook uses friends
+                    "posts": "N/A", # Hard to get total posts on FB
+                    "bio": dom_data.get("bioItems", [""])[0] if dom_data.get("bioItems") else meta_data.get("description", ""),
+                    "verified": "N/A",
+                    "stories": [],
+                    "follower_list": [],
+                    "following_list": []
+                },
                 "account_archeology": {
-                    "Full_Name": graphql_profile.get("name", dom_data.get("name", meta_data.get("og_title", "N/A"))),
                     "Facebook_ID": fb_id,
                     "Profile_URL": meta_data.get("og_url", url),
-                    "Profile_Image": dom_data.get("profileImg", meta_data.get("og_image", "N/A")),
                     "Cover_Photo": dom_data.get("coverImg", "N/A"),
                     "Page_Type": meta_data.get("og_type", "N/A")
                 },

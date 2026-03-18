@@ -133,6 +133,20 @@ async def get_tiktok_intel(username):
                     "collection_time_utc": datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S'),
                     "clearance_level": "TOP SECRET // DEEP INTELLIGENCE"
                 },
+                "profile_card": {
+                    "photo_url": user.get("avatarLarger", user.get("avatarMedium", "")),
+                    "name": user.get("nickname", "N/A"),
+                    "username": f"@{user.get('uniqueId', username)}",
+                    "id": user.get("id", "N/A"),
+                    "followers": format_num(stats_v2.get("followerCount", stats.get("followerCount", 0))),
+                    "following": format_num(stats_v2.get("followingCount", stats.get("followingCount", 0))),
+                    "posts": format_num(stats_v2.get("videoCount", stats.get("videoCount", 0))),
+                    "bio": user.get("signature", ""),
+                    "verified": user.get("verified", False),
+                    "stories": [], # Requires auth/mobile interception typically
+                    "follower_list": intel_data["followers"][:50], # Sample top 50
+                    "following_list": [] # Often identical endpoint to followers, placeholder
+                },
                 "system_identity_dna": {
                     "OdinID": app_context.get("odinId", "HIDDEN"),
                     "WebID": app_context.get("webId", "HIDDEN"),

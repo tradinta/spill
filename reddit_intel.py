@@ -172,15 +172,26 @@ async def get_reddit_intel(username):
                 "clearance_level": "TOP SECRET // Reddit Reconnaissance",
                 "items_analyzed": len(all_items)
             },
+            "profile_card": {
+                "photo_url": about.get("icon_img", "").split("?")[0],
+                "name": about.get("subreddit", {}).get("title", about.get("name", "N/A")),
+                "username": f"u/{username}",
+                "id": about.get("id", "N/A"),
+                "followers": format_num(about.get("subreddit", {}).get("subscribers", 0)), # Display followers
+                "following": format_num(about.get("total_karma", 0)), # Repurpose following for Total Karma
+                "posts": format_num(len(posts)), 
+                "bio": about.get("subreddit", {}).get("public_description", ""),
+                "verified": about.get("has_verified_email", False),
+                "stories": [],
+                "follower_list": [],
+                "following_list": []
+            },
             "account_archeology": {
-                "Display_Name": about.get("subreddit", {}).get("title", about.get("name", "N/A")),
                 "Account_Created": format_ts(about.get("created_utc")),
                 "Account_Age_Days": (datetime.now(timezone.utc) - datetime.fromtimestamp(about.get("created_utc", 0), tz=timezone.utc)).days if about.get("created_utc") else "N/A",
                 "Is_Gold": about.get("is_gold", False),
                 "Is_Mod": about.get("is_mod", False),
                 "Is_Employee": about.get("is_employee", False),
-                "Has_Verified_Email": about.get("has_verified_email", False),
-                "Avatar_URL": about.get("icon_img", "N/A").split("?")[0],
                 "Trophies": trophies_list
             },
             "karma_breakdown": {
