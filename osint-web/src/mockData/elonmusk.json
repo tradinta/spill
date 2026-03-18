@@ -1,0 +1,333 @@
+{
+  "dossier_meta": {
+    "target": "@elonmusk",
+    "collection_time_utc": "2026-03-17 00:56:35",
+    "clearance_level": "TOP SECRET // X Reconnaissance"
+  },
+  "technical_dna": {
+    "Rest_ID": "44196397",
+    "Guest_Token": "2033708829599248630",
+    "Transaction_ID": "rGoiOzW8ZeybfyrRqOEywxRHB02n2ddNrszsCI/nJMQcZS8ANBtzmch4Bvh4buiZIYrvxal9qdy/rFc8eEMNKffG/obhrw"
+  },
+  "account_archeology": {
+    "Account_Created": "Tue Jun 02 20:12:29 +0000 2009",
+    "User_Name": "Elon Musk",
+    "Verified_Type": "Blue/Premium",
+    "Location": "N/A",
+    "Description": ""
+  },
+  "behavioral_intelligence": {
+    "Device_Fingerprint": {
+      "Twitter for iPhone": 100
+    },
+    "Interaction_Network": {
+      "Top_Replies": {},
+      "Top_Retweets": {},
+      "Top_Mentions": {
+        "realDonaldTrump": 2
+      }
+    },
+    "Sleep_Cycle_Heatmap_UTC": {
+      "0": {
+        "0": 2,
+        "1": 0,
+        "2": 1,
+        "3": 1,
+        "4": 1,
+        "5": 0,
+        "6": 0,
+        "7": 1,
+        "8": 1,
+        "9": 1,
+        "10": 0,
+        "11": 0,
+        "12": 0,
+        "13": 1,
+        "14": 0,
+        "15": 1,
+        "16": 2,
+        "17": 0,
+        "18": 0,
+        "19": 4,
+        "20": 2,
+        "21": 1,
+        "22": 0,
+        "23": 0
+      },
+      "1": {
+        "0": 0,
+        "1": 1,
+        "2": 1,
+        "3": 0,
+        "4": 2,
+        "5": 1,
+        "6": 0,
+        "7": 0,
+        "8": 1,
+        "9": 0,
+        "10": 0,
+        "11": 0,
+        "12": 0,
+        "13": 0,
+        "14": 1,
+        "15": 0,
+        "16": 2,
+        "17": 0,
+        "18": 2,
+        "19": 0,
+        "20": 0,
+        "21": 0,
+        "22": 0,
+        "23": 0
+      },
+      "2": {
+        "0": 0,
+        "1": 0,
+        "2": 0,
+        "3": 2,
+        "4": 0,
+        "5": 2,
+        "6": 4,
+        "7": 2,
+        "8": 0,
+        "9": 0,
+        "10": 0,
+        "11": 0,
+        "12": 0,
+        "13": 0,
+        "14": 0,
+        "15": 2,
+        "16": 1,
+        "17": 0,
+        "18": 2,
+        "19": 1,
+        "20": 1,
+        "21": 1,
+        "22": 0,
+        "23": 0
+      },
+      "3": {
+        "0": 3,
+        "1": 2,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 1,
+        "9": 0,
+        "10": 0,
+        "11": 0,
+        "12": 2,
+        "13": 0,
+        "14": 0,
+        "15": 1,
+        "16": 1,
+        "17": 3,
+        "18": 0,
+        "19": 0,
+        "20": 0,
+        "21": 1,
+        "22": 0,
+        "23": 2
+      },
+      "4": {
+        "0": 0,
+        "1": 0,
+        "2": 0,
+        "3": 1,
+        "4": 1,
+        "5": 1,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0,
+        "10": 0,
+        "11": 0,
+        "12": 1,
+        "13": 0,
+        "14": 0,
+        "15": 1,
+        "16": 1,
+        "17": 2,
+        "18": 0,
+        "19": 0,
+        "20": 1,
+        "21": 4,
+        "22": 0,
+        "23": 0
+      },
+      "5": {
+        "0": 0,
+        "1": 1,
+        "2": 1,
+        "3": 1,
+        "4": 1,
+        "5": 0,
+        "6": 1,
+        "7": 1,
+        "8": 0,
+        "9": 0,
+        "10": 0,
+        "11": 0,
+        "12": 0,
+        "13": 1,
+        "14": 0,
+        "15": 0,
+        "16": 0,
+        "17": 1,
+        "18": 0,
+        "19": 0,
+        "20": 1,
+        "21": 0,
+        "22": 2,
+        "23": 0
+      },
+      "6": {
+        "0": 1,
+        "1": 1,
+        "2": 0,
+        "3": 0,
+        "4": 1,
+        "5": 0,
+        "6": 1,
+        "7": 1,
+        "8": 0,
+        "9": 0,
+        "10": 1,
+        "11": 0,
+        "12": 1,
+        "13": 0,
+        "14": 0,
+        "15": 0,
+        "16": 2,
+        "17": 1,
+        "18": 0,
+        "19": 0,
+        "20": 0,
+        "21": 0,
+        "22": 2,
+        "23": 0
+      }
+    },
+    "Peak_Activity_Hour_UTC": 16
+  },
+  "visibility_diagnostics": {
+    "Search_Slop_Flag": "N/A",
+    "Is_Suspended": "FALSE",
+    "Possible_Shadowban": "None Detected",
+    "Professional_Account": "FALSE",
+    "Flags": "Standard"
+  },
+  "public_metrics": {
+    "Followers": "236,734,599",
+    "Following": "1,298",
+    "Tweets_Total": "99,266",
+    "Media_Archived_Count": "4,389",
+    "Favorites_Count": "216,717"
+  },
+  "lists_intelligence": [],
+  "media_archive": [
+    {
+      "type": "photo",
+      "url": "https://pbs.twimg.com/media/GSZvkScbIAAwHQi.jpg",
+      "tweet_id": "1812258574049157405"
+    },
+    {
+      "type": "photo",
+      "url": "https://pbs.twimg.com/media/GbrTB8GXEAYrk2N.jpg",
+      "tweet_id": "1854026234339938528"
+    },
+    {
+      "type": "photo",
+      "url": "https://pbs.twimg.com/media/FRNsuSFWUAUW6aP.jpg",
+      "tweet_id": "1518677066325053441"
+    },
+    {
+      "type": "photo",
+      "url": "https://pbs.twimg.com/media/FRZViwWX0AMsqQ1.jpg",
+      "tweet_id": "1519495982723084290"
+    },
+    {
+      "type": "photo",
+      "url": "https://pbs.twimg.com/media/Gbty0ylX0BIEPA4.jpg",
+      "tweet_id": "1854201929519247803"
+    },
+    {
+      "type": "video",
+      "url": "https://pbs.twimg.com/amplify_video_thumb/1812256938383568896/img/_R5F6myzmRblxf_8.jpg",
+      "tweet_id": "1812256998588662068"
+    },
+    {
+      "type": "photo",
+      "url": "https://pbs.twimg.com/media/GbrazRVW8AEmBOK.jpg",
+      "tweet_id": "1854034776815972649"
+    },
+    {
+      "type": "video",
+      "url": "https://pbs.twimg.com/amplify_video_thumb/1820602688117354497/img/YZTX78aqXVB2dkG3.jpg",
+      "tweet_id": "1820685675899072930"
+    },
+    {
+      "type": "photo",
+      "url": "https://pbs.twimg.com/media/Fh0bPd7VQAAU31D.jpg",
+      "tweet_id": "1593459801966538755"
+    },
+    {
+      "type": "video",
+      "url": "https://pbs.twimg.com/amplify_video_thumb/1823742429050417152/img/qnjBLFf3ESNkkXpJ.jpg",
+      "tweet_id": "1823742501884453312"
+    },
+    {
+      "type": "photo",
+      "url": "https://pbs.twimg.com/media/FglVYVmXkAIWB5w.jpg",
+      "tweet_id": "1587894226695884800"
+    },
+    {
+      "type": "photo",
+      "url": "https://pbs.twimg.com/media/Gbyr5aUXYB4swH7.jpg",
+      "tweet_id": "1854546155381617119"
+    },
+    {
+      "type": "photo",
+      "url": "https://pbs.twimg.com/media/F2KqI_ZXUAAGRCD.jpg",
+      "tweet_id": "1685096284275802112"
+    },
+    {
+      "type": "photo",
+      "url": "https://pbs.twimg.com/media/F68DAMAWIAAtA9Q.jpg",
+      "tweet_id": "1706586107335311542"
+    },
+    {
+      "type": "photo",
+      "url": "https://pbs.twimg.com/media/Fy3d3Q4XsAAPSAN.jpg",
+      "tweet_id": "1670234980776132608"
+    },
+    {
+      "type": "photo",
+      "url": "https://pbs.twimg.com/media/FRcu9TeXEAMjvTM.jpg",
+      "tweet_id": "1519735033950470144"
+    },
+    {
+      "type": "photo",
+      "url": "https://pbs.twimg.com/media/FIdNmXtVkAEF0Ss.jpg",
+      "tweet_id": "1479236333516165121"
+    },
+    {
+      "type": "photo",
+      "url": "https://pbs.twimg.com/media/Gbrm7fkaEAAM7rg.jpg",
+      "tweet_id": "1854048115206078507"
+    },
+    {
+      "type": "photo",
+      "url": "https://pbs.twimg.com/media/GH62TXvXAAMzE6w.jpg",
+      "tweet_id": "1765048551023734801"
+    },
+    {
+      "type": "photo",
+      "url": "https://pbs.twimg.com/media/Fo53ramacAAigCq.jpg",
+      "tweet_id": "1625368108461613057"
+    }
+  ]
+}

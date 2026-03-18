@@ -1,0 +1,51 @@
+{
+  "dossier_meta": {
+    "target": "fb/zuck",
+    "collection_time_utc": "2026-03-17 01:30:28",
+    "clearance_level": "TOP SECRET // Facebook Reconnaissance",
+    "graphql_packets_intercepted": 0
+  },
+  "account_archeology": {
+    "Full_Name": "Mark Zuckerberg Akaunti Iliyothibitishwa",
+    "Facebook_ID": "4",
+    "Profile_URL": "https://www.facebook.com/zuck",
+    "Profile_Image": "https://scontent.fmba5-2.fna.fbcdn.net/v/t39.30808-1/632598281_10117314650513371_3238643608998008744_n.jpg?stp=dst-jpg_s200x200_tt6&_nc_cat=105&ccb=1-7&_nc_sid=1d2534&_nc_ohc=vikvDpKtOp8Q7kNvwHXotUl&_nc_oc=AdlPjtPppQJHca6hD1FLEoo5v6a_5VCP2agRCmlXOLXnmEaK-3UP-GzIg71ERwYCzRk&_nc_zt=24&_nc_ht=scontent.fmba5-2.fna&_nc_gid=SYT0E_TYCoSNGgf83BxEmw&_nc_ss=8&oh=00_AfyFVA9VDVLv1-tk_qzNbvs8_DwCycyy5NJX7e0qn6fVVA&oe=69BE8C0B",
+    "Cover_Photo": null,
+    "Page_Type": "video.other"
+  },
+  "public_metrics": {
+    "Followers": null,
+    "Friends": null
+  },
+  "about_intelligence": {
+    "Work": [
+      "Founder and CEO kwa Meta",
+      "Founder and CEO kwa Meta"
+    ],
+    "Education": [
+      "Alisomea Computer Science and Psychology katika Harvard University"
+    ],
+    "Location": "N/A",
+    "Bio_Items": [
+      "Akaunti Iliyothibitishwa",
+      "Mark Zuckerberg",
+      "Utangulizi",
+      "Bringing the world closer together.",
+      "Wasifu · Mtu maarufu",
+      "Founder and CEO kwa Meta",
+      "Anafanya kazi Biohub",
+      "Alisomea Computer Science and Psychology katika Harvard University",
+      "Anaishi Palo Alto, California",
+      "Kutoka Dobbs Ferry, New York"
+    ],
+    "Description": "Mark Zuckerberg. Vipendwa 121,146,261 · 540,893 wanaongea kuhusu hili. Bringing the world closer together."
+  },
+  "visible_posts": [
+    "Always a great time seeing these legends fight. Congrats Charles Oliveira, Caio Borralho, and Drew Dober. Max Holloway is always impressive. Best sport in the world."
+  ],
+  "graphql_intelligence": {
+    "Profile_Data_Captured": false,
+    "Username_from_GraphQL": "N/A",
+    "Profile_Type": "N/A"
+  }
+}

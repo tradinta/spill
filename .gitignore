@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.env
+
+# Node
+osint-web/node_modules/
+osint-web/dist/
+.eslintcache
+
+# JSON Dossiers (Optional, but usually you don't want to push generated reports)
+dossier_*.json
+
+# OS Specific
+.DS_Store
+Thumbs.db
