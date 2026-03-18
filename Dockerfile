@@ -23,11 +23,17 @@ RUN apt-get update && apt-get install -y \
 # Set the working directory in the container
 WORKDIR /app
 
+# Create a non-root user for Hugging Face
+RUN useradd -m -u 1000 user
+USER user
+ENV PATH="/home/user/.local/bin:$PATH"
+
 # Copy the current directory contents into the container at /app
-COPY . /app
+# We use --chown to ensure the 'user' owns the files
+COPY --chown=user . /app
 
 # Install any needed packages specified in requirements.txt
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir --upgrade -r requirements.txt
 
 # Install Playwright browsers (Chromium)
 RUN playwright install chromium
