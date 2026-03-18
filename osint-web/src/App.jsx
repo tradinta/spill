@@ -157,6 +157,7 @@ export default function App() {
     { target: 'spez', engine: 'Reddit', time: '5 hours ago', status: 'Partial Data' }
   ]);
   const [credits, setCredits] = useState(8420);
+  const [errorHeader, setErrorHeader] = useState(null);
 
   useEffect(() => {
     const link = document.createElement('link');
@@ -182,6 +183,7 @@ export default function App() {
     e.preventDefault();
     if (!targetInput) return;
     
+    setErrorHeader(null);
     setIsProcessing(true);
     setDossier(null);
     if (activeEngine !== 'account') setCredits((prev) => prev - 15);
@@ -203,10 +205,9 @@ export default function App() {
       setHistory([{ target: targetInput, engine: engineName, time: 'Just now', status: 'Success' }, ...history]);
     } catch (error) {
       console.error(error);
-      // Fallback for resiliency if python scripts fail to launch cleanly or auth-walls hit
-      setDossier(generateMockData(activeEngine, targetInput));
+      setErrorHeader(`Connection Error: ${error.message}. Ensure your API Space is 'Running'.`);
       const engineName = engines.find(eng => eng.id === activeEngine)?.name || activeEngine;
-      setHistory([{ target: targetInput, engine: engineName, time: 'Just now', status: 'Partial Data' }, ...history]);
+      setHistory([{ target: targetInput, engine: engineName, time: 'Just now', status: 'Failed' }, ...history]);
     } finally {
       setIsProcessing(false);
     }
