@@ -120,25 +120,176 @@ const ProcessingVisualizer = ({ config }) => {
   const Icon = config.icon;
 
   return (
-    <div className="flex flex-col md:flex-row items-center justify-center gap-16 py-12 animate-in fade-in zoom-in duration-500">
-      <div className="relative flex items-center justify-center w-64 h-64">
-        <div className={`absolute inset-0 rounded-full border-2 border-dashed border-slate-700 animate-[spin_10s_linear_infinite] opacity-50`}></div>
-        <div className={`absolute inset-4 rounded-full border border-t-transparent ${config.color.replace('text-', 'border-')} animate-[spin_3s_linear_infinite]`}></div>
-        <div className={`absolute inset-12 rounded-full ${config.bg} opacity-10 animate-ping`}></div>
-        <div className={`relative z-10 w-24 h-24 rounded-2xl bg-[#111111] border ${config.color.replace('text-', 'border-')} flex items-center justify-center shadow-2xl overflow-hidden`}>
+    <div className="flex flex-col md:flex-row items-center justify-center gap-16 py-12 animate-in fade-in zoom-in duration-700">
+      
+      {/* --- DEEP SCAN RADAR LENS --- */}
+      <div className="relative flex items-center justify-center w-72 h-72">
+        {/* Outer Grid Ring */}
+        <div className="absolute inset-0 rounded-full border border-slate-800/50"></div>
+        <div className="absolute top-1/2 left-0 w-full h-[1px] bg-slate-800/30"></div>
+        <div className="absolute left-1/2 top-0 w-[1px] h-full bg-slate-800/30"></div>
+
+        {/* Ring 1: Slow Dashed Outer */}
+        <div className={`absolute inset-4 rounded-full border-2 border-dashed ${config.color.replace('text-', 'border-')} opacity-30 animate-[spin_15s_linear_infinite]`}></div>
+        
+        {/* Ring 2: Fast Solid Inner */}
+        <div className={`absolute inset-8 rounded-full border border-t-transparent border-l-transparent ${config.color.replace('text-', 'border-')} animate-[spin_3s_linear_infinite]`}></div>
+        
+        {/* Radar Sweep Gradient */}
+        <div className="absolute inset-2 rounded-full overflow-hidden">
+           <div className={`w-full h-full ${config.bg} opacity-10 animate-[spin_4s_linear_infinite] origin-center rotate-180`} 
+                style={{ background: `conic-gradient(from 0deg, transparent 0deg, transparent 270deg, currentColor 360deg)` }}>
+           </div>
+        </div>
+
+        {/* Core Pulsing Glow */}
+        <div className={`absolute inset-16 rounded-full ${config.bg} opacity-10 animate-ping duration-1000`}></div>
+        
+        {/* Center Target Icon Box */}
+        <div className={`relative z-10 w-28 h-28 rounded-2xl bg-[#0a0a0a] border border-[#262626] flex items-center justify-center shadow-2xl transition-all duration-300 ${step % 2 === 0 ? 'scale-95' : 'scale-100'}`}>
+          <div className="absolute inset-0 rounded-2xl overflow-hidden">
+             {/* Micro grid background inside the box */}
+             <div className="w-full h-full opacity-10" style={{ backgroundImage: 'radial-gradient(circle, #ffffff 1px, transparent 1px)', backgroundSize: '8px 8px' }}></div>
+          </div>
           <div className={`absolute inset-0 ${config.bg} opacity-5`}></div>
-          <Icon className={`w-12 h-12 ${config.color}`} />
+          <Icon className={`w-14 h-14 ${config.color} filter drop-shadow-[0_0_8px_currentColor]`} />
+        </div>
+        
+        {/* Floating "Digital Dust" Nodes */}
+        <div className={`absolute top-4 right-10 w-1.5 h-1.5 rounded-full ${config.bg} animate-pulse shadow-[0_0_5px_currentColor]`}></div>
+        <div className={`absolute bottom-8 left-8 w-2 h-2 rounded-full ${config.bg} animate-bounce shadow-[0_0_5px_currentColor]`}></div>
+      </div>
+
+      {/* --- EXTRACTION LOGS --- */}
+      <div className="flex flex-col gap-4 w-full max-w-md">
+        <div className="flex items-center justify-between mb-2 border-b border-[#262626] pb-2">
+            <h4 className="text-slate-500 font-mono text-[10px] tracking-[0.2em] uppercase">Tactical Extraction Sequence</h4>
+            <span className={`text-[10px] font-mono font-bold ${config.color}`}>{Math.round((step / (steps.length - 1)) * 100)}%</span>
+        </div>
+        
+        <div className="space-y-3 relative">
+            {/* Connecting Line */}
+            <div className="absolute left-[11px] top-6 bottom-6 w-[2px] bg-[#262626] z-0"></div>
+
+            {steps.map((s, i) => {
+              const isActive = i === step;
+              const isPast = i < step;
+              const isFuture = i > step;
+              
+              return (
+                <div key={i} className={`relative z-10 flex items-center gap-4 transition-all duration-500 ${isFuture ? 'opacity-30' : 'opacity-100'}`}>
+                  {/* Status Indicator */}
+                  <div className={`w-6 h-6 rounded-full flex flex-shrink-0 items-center justify-center bg-[#0a0a0a] border-2 transition-colors duration-300
+                      ${isPast ? `border-emerald-500 text-emerald-500` : isActive ? `border-${config.color.split('-')[1]} shadow-[0_0_10px_currentColor] text-white` : 'border-[#262626] text-transparent'}`}>
+                     {isPast && <CheckCircle2 className="w-3 h-3 text-emerald-500" />}
+                     {isActive && <div className={`w-2 h-2 rounded-full ${config.bg} animate-ping`}></div>}
+                  </div>
+                  
+                  {/* Log Text Box */}
+                  <div className={`flex-1 p-3 rounded-xl border font-mono text-xs transition-all duration-300
+                      ${isPast ? 'bg-[#111111]/50 border-[#262626] text-slate-400' : 
+                        isActive ? `bg-[#111111] ${config.color.replace('text-', 'border-')} text-white backdrop-blur shadow-lg translate-x-1` : 
+                        'bg-transparent border-transparent text-slate-600'}`}>
+                    {s.label}
+                    {isActive && <span className="inline-block ml-1 animate-pulse">_</span>}
+                  </div>
+                </div>
+              );
+            })}
         </div>
       </div>
-      <div className="flex flex-col gap-4 w-full max-w-sm">
-        <h4 className="text-slate-500 font-mono text-xs tracking-widest uppercase mb-2">Extraction Status</h4>
-        {steps.map((s, i) => (
-          <div key={i} className={`flex items-center gap-4 p-3 rounded-xl border transition-all duration-300 ${i < step ? 'bg-[#111111] border-slate-800 opacity-50' : i === step ? `bg-[#111111] ${config.color.replace('text-', 'border-')} ${config.glow} translate-x-2` : 'bg-transparent border-transparent opacity-30 grayscale'}`}>
-            {i < step ? <CheckCircle2 className={`w-5 h-5 ${config.color}`} /> : i === step ? <Loader2 className={`w-5 h-5 ${config.color} animate-spin`} /> : <div className="w-5 h-5 rounded-full border-2 border-slate-600"></div>}
-            <span className={`text-sm font-medium ${i === step ? 'text-white' : 'text-slate-400'}`}>{s.label}</span>
-          </div>
-        ))}
+    </div>
+  );
+};
+
+const ProfileCard = ({ profile, config }) => {
+  if (!profile) return null;
+  
+  return (
+    <div className={`relative w-full bg-[#111111] border border-[#262626] rounded-2xl overflow-hidden shadow-2xl mb-8 group animate-in fade-in slide-in-from-bottom-8 duration-500`}>
+      {/* Top Accent Line */}
+      <div className={`absolute top-0 left-0 w-full h-1 ${config.bg} shadow-[0_0_15px_currentColor]`}></div>
+      
+      <div className="p-6 md:p-8 flex flex-col md:flex-row items-start md:items-center gap-6 md:gap-8">
+        {/* Avatar */}
+        <div className={`relative shrink-0 w-24 h-24 md:w-32 md:h-32 rounded-full p-1 border-2 ${config.color.replace('text-', 'border-')} border-dashed group-hover:animate-[spin_10s_linear_infinite]`}>
+           <div className="absolute inset-1 rounded-full overflow-hidden bg-[#0a0a0a] border border-[#262626]">
+              {profile.photo_url ? (
+                <img src={profile.photo_url} alt="Target Avatar" className="w-full h-full object-cover group-hover:[animation-play-state:paused]" />
+              ) : (
+                <div className="w-full h-full flex items-center justify-center text-slate-700">
+                  <Target className="w-8 h-8" />
+                </div>
+              )}
+           </div>
+           {/* Online Dot / Accents */}
+           <div className={`absolute bottom-1 right-1 w-4 h-4 rounded-full border-2 border-[#111111] ${config.bg}`}></div>
+        </div>
+
+        {/* Core Identity */}
+        <div className="flex-1 min-w-0">
+           <div className="flex items-center gap-3 mb-1">
+              <h2 className="text-2xl md:text-3xl font-bold text-white truncate drop-shadow-md">{profile.name || 'UNKNOWN IDENTITY'}</h2>
+              {profile.verified && <ShieldCheck className="w-5 h-5 text-emerald-400 shrink-0" />}
+           </div>
+           
+           <div className="flex items-center gap-3 text-sm font-mono text-slate-400 mb-4">
+              <span className={`px-2 py-0.5 rounded bg-[#0a0a0a] border border-[#262626] ${config.color}`}>
+                {profile.username || 'NO_USERNAME'}
+              </span>
+              <span className="hidden sm:inline">|</span>
+              <span className="flex items-center gap-1"><LinkIcon className="w-3 h-3" /> UID: {profile.id || 'HIDDEN'}</span>
+           </div>
+
+           {/* Metrics Grid */}
+           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+              <div className="bg-[#0a0a0a] border border-[#262626] p-3 rounded-xl flex flex-col justify-center">
+                 <span className="text-[10px] text-slate-500 uppercase tracking-widest font-bold mb-1">Followers</span>
+                 <span className="text-lg font-mono text-white leading-none">{profile.followers || 'N/A'}</span>
+              </div>
+              <div className="bg-[#0a0a0a] border border-[#262626] p-3 rounded-xl flex flex-col justify-center">
+                 <span className="text-[10px] text-slate-500 uppercase tracking-widest font-bold mb-1">Following</span>
+                 <span className="text-lg font-mono text-white leading-none">{profile.following || 'N/A'}</span>
+              </div>
+              <div className="bg-[#0a0a0a] border border-[#262626] p-3 rounded-xl flex flex-col justify-center">
+                 <span className="text-[10px] text-slate-500 uppercase tracking-widest font-bold mb-1">Posts/Media</span>
+                 <span className="text-lg font-mono text-white leading-none">{profile.posts || profile.media_count || 'N/A'}</span>
+              </div>
+              {profile.bio && (
+                 <div className="col-span-2 sm:col-span-1 bg-[#0a0a0a] border border-[#262626] p-3 rounded-xl flex flex-col justify-center overflow-hidden">
+                   <span className="text-[10px] text-slate-500 uppercase tracking-widest font-bold mb-1">Bio Fragment</span>
+                   <span className="text-xs text-slate-300 truncate" title={profile.bio}>{profile.bio}</span>
+                 </div>
+              )}
+           </div>
+        </div>
       </div>
+      
+      {/* Optional Extracted Lists/Stories (Horizontal Scroll) */}
+      {(profile.stories?.length > 0 || profile.follower_list?.length > 0 || profile.following_list?.length > 0) && (
+        <div className="border-t border-[#262626] bg-[#0a0a0a]/50 p-4 md:px-8">
+           <h4 className={`text-[10px] font-bold uppercase tracking-widest ${config.color} mb-3 flex items-center gap-2`}>
+             <Eye className="w-3 h-3" /> Intercepted volatile payloads
+           </h4>
+           <div className="flex gap-4 overflow-x-auto pb-2 scrollbar-hide">
+              {profile.stories?.length > 0 && (
+                <div className="shrink-0 flex items-center gap-2 bg-[#111111] border border-[#262626] px-3 py-2 rounded-lg text-xs font-mono">
+                  <Film className="w-4 h-4 text-purple-400" /> {profile.stories.length} Stories Captured
+                </div>
+              )}
+              {profile.follower_list?.length > 0 && (
+                <div className="shrink-0 flex items-center gap-2 bg-[#111111] border border-[#262626] px-3 py-2 rounded-lg text-xs font-mono">
+                  <Users className="w-4 h-4 text-emerald-400" /> {profile.follower_list.length} Followers Listed
+                </div>
+              )}
+              {profile.following_list?.length > 0 && (
+                <div className="shrink-0 flex items-center gap-2 bg-[#111111] border border-[#262626] px-3 py-2 rounded-lg text-xs font-mono">
+                  <Network className="w-4 h-4 text-blue-400" /> {profile.following_list.length} Following Listed
+                </div>
+              )}
+           </div>
+        </div>
+      )}
     </div>
   );
 };
@@ -535,7 +686,11 @@ export default function App() {
                       <div className="text-sm text-slate-300 font-mono">{new Date(dossier.timestamp).toLocaleString()}</div>
                     </div>
                   </div>
-
+                  
+                  {/* ====== CORE IDENTITY DOSSIER (UNIFIED) ====== */}
+                  {dossier.profile_card && (
+                    <ProfileCard profile={dossier.profile_card} config={currentConfig} />
+                  )}
 
                   {/* ====== UNIVERSAL DOSSIER RENDERER ====== */}
                   {(() => {
@@ -614,8 +769,8 @@ export default function App() {
                       return <span className="text-white text-sm">{JSON.stringify(val)}</span>;
                     };
 
-                    // Filter out meta/target/timestamp which are rendered in the header
-                    const skipKeys = new Set(['target', 'timestamp', 'dossier_meta']);
+                    // Filter out meta/target/timestamp AND profile_card which are rendered separately
+                    const skipKeys = new Set(['target', 'timestamp', 'dossier_meta', 'profile_card']);
                     const sections = Object.entries(dossier).filter(([k]) => !skipKeys.has(k));
 
                     // Color cycle for section accents
