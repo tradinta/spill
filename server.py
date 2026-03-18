@@ -8,6 +8,14 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 
+@app.route('/')
+def health_check():
+    return jsonify({
+        "status": "online",
+        "service": "Spill OSINT API",
+        "endpoints": ["/api/extract"]
+    })
+
 SCRIPT_MAP = {
     'x': 'x_intel.py',
     'reddit': 'reddit_intel.py',
